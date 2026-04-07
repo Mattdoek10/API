@@ -41,3 +41,13 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Daily checkout 1/04/2026/ Weekly checkout.
+
+wat heb ik vandaag gedaan? ik heb vandaag gekeken naar de verchillende api's die ik kan gebruiken en welke idee ik wil gaan uitvoeren. Mijn idee was uiteindelijk: Een webapp waarbij je een random idee kan genereren adv het weer. Dus met een API die je huidige locatie bekijkt, en dan een ander api die naar het weer kijkt op je locatie, word er een idee gegenereerd. Als het regent krijg je dan een idee die je binnehuis kan doen, en als het regent dan het omgekeerde.
+
+wat heb ik geleerd? ik heb geleerd hoe te werken met de framework Astro.
+
+hoe lang duurde het? leren met astro onegveer 1-2 uren. Mijn idee bedenken en dingen opzoeken ook ongeveer 2 uren.
+
+wat ga ik morgen doen. morgen ga ik mijn idee uitleggen en dan van daaruit werken en kijken als mijn APIS goed zijn 

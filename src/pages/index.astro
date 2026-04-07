@@ -1,11 +1,15 @@
 ---
-const url = "https://jsonplaceholder.typicode.com/posts";
+const base = "https://bored-api.appbrewery.com";
+const endpoint = "/filter?type=education"
+
+const url = base + endpoint;
 const response = await fetch(url);
 const todos = await response.json();
 console.log(todos.length)
+
 ---
 
-<html lang="en">
+<html lang="nl">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,14 +17,14 @@ console.log(todos.length)
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
+		<link rel="stylesheet" href="/src/styles/style.css" />
 	</head>
 	<body>
 		<h1>Astro</h1>
 
-		<p>hallo world, test</p>
 		<p>ik heb {todos.length}</p>
 		<ul>
-			{todos.map((todo) => <li>{todo.title}</li>)}
+			{todos.map((todo) => <li>{todo.activity}</li>)}
 		</ul>
 	</body>
 </html>
