@@ -51,3 +51,13 @@ wat heb ik geleerd? ik heb geleerd hoe te werken met de framework Astro.
 hoe lang duurde het? leren met astro onegveer 1-2 uren. Mijn idee bedenken en dingen opzoeken ook ongeveer 2 uren.
 
 wat ga ik morgen doen. morgen ga ik mijn idee uitleggen en dan van daaruit werken en kijken als mijn APIS goed zijn 
+
+## Daily checkout 9/04/2026/ 
+
+wat heb ik vandaag gedaan? ik heb vandaag mijn idee vastgemaakt. Ik heb namelijk een ander idee, en dit heb ik met de docent besproken en hetblijkt goed te zijn. Mijn idee is dat je met een geaolocation api je huidige locatie kan zien en met een kaart van nederland kan je de verschillende events zien met de ticketmaster api. Daarnaast kan je met local storage de events opslaan en met notification api een melding sturen als de events starten bijvoorbeeld. Ik heb daarnaast de verschillende apis bezocht en prpberen laten werken.
+
+wat heb ik geleerd? ik heb geleerd hoe ik keys kan gebruiken van de api's
+
+hoe lang duurde het? in totaal 2 uren ongeveer
+
+wat ga ik morgen doen. morgen ga ik mijn idee uitwerken en me content laten laden
