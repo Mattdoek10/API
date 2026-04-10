@@ -52,7 +52,7 @@ hoe lang duurde het? leren met astro onegveer 1-2 uren. Mijn idee bedenken en di
 
 wat ga ik morgen doen. morgen ga ik mijn idee uitleggen en dan van daaruit werken en kijken als mijn APIS goed zijn 
 
-## Daily checkout 9/04/2026/ 
+## Daily checkout 8/04/2026/ 
 
 wat heb ik vandaag gedaan? ik heb vandaag mijn idee vastgemaakt. Ik heb namelijk een ander idee, en dit heb ik met de docent besproken en hetblijkt goed te zijn. Mijn idee is dat je met een geaolocation api je huidige locatie kan zien en met een kaart van nederland kan je de verschillende events zien met de ticketmaster api. Daarnaast kan je met local storage de events opslaan en met notification api een melding sturen als de events starten bijvoorbeeld. Ik heb daarnaast de verschillende apis bezocht en prpberen laten werken.
 
@@ -61,3 +61,37 @@ wat heb ik geleerd? ik heb geleerd hoe ik keys kan gebruiken van de api's
 hoe lang duurde het? in totaal 2 uren ongeveer
 
 wat ga ik morgen doen. morgen ga ik mijn idee uitwerken en me content laten laden
+
+## Daily checkout 8/04/2026/ 
+
+wat heb ik vandaag gedaan? ik heb vandaag mijn idee vastgemaakt. Ik heb namelijk een ander idee, en dit heb ik met de docent besproken en hetblijkt goed te zijn. Mijn idee is dat je met een geaolocation api je huidige locatie kan zien en met een kaart van nederland kan je de verschillende events zien met de ticketmaster api. Daarnaast kan je met local storage de events opslaan en met notification api een melding sturen als de events starten bijvoorbeeld. Ik heb daarnaast de verschillende apis bezocht en prpberen laten werken.
+
+wat heb ik geleerd? ik heb geleerd hoe ik keys kan gebruiken van de api's
+
+hoe lang duurde het? in totaal 2 uren ongeveer
+
+wat ga ik morgen doen. morgen ga ik mijn idee uitwerken en me content laten laden
+
+## Weekly Nerd Johan van Accesibility
+Hij liet een screenreader alles oplezen en heel snel ook, vervolgens vorge hij ons wat we hoorde etc.
+
+Principe van WCAG
+- Perceivable
+- Operable
+- Understandable
+- Robust
+
+Met de toetsenbord kan men snel en makkelijk bewegen, ze gebruiken de letter 'H' om te navigerren binnen secties of stukken van de website. Dus hij gaat niet van rechts naar links zoals wij zien.
+
+Vragen voor mensen met accesibillity problemen als je voor hun ontwerp;
+- Wat maakt het voor diegene moeilijk
+- Wat heeft die nodig?
+- Heb je een proejct van jezelf waar diegene zou afhaken
+
+Bevindingen van persoon 2;
+- ze kan niet tegen velle kleuren bij wesbite anders krijgt ze hoofdpijn
+- Ze kan ook niet goed mee als er veel info naast mekaar zit en beetje door elkaar.
+
+
+
+

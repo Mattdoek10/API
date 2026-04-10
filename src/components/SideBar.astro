@@ -1,12 +1,14 @@
 ---
 // @ts-nocheck
+import { API_TM } from "../scripts/ticketmaster.js";
+API_TM();
 import "/public/styles/style.css";
 const { href, text } = Astro.props;
 ---
-<aside>
-    <h1>Titel Event</h1>
-    <img src="/" alt="Foto van event" />
-    <p>Beschrijving van het event.</p>
+<aside id="eventSidebar">
+    <h1 id="eventTitle">Titel Event</h1>
+    <img id="eventImage" src="/" alt="Foto van event" />
+    <p id="eventDescription">Beschrijving van het event.</p>
 
 
     <ul>
