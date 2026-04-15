@@ -2,29 +2,29 @@
 // @ts-nocheck
 
 import { API_TM } from "../scripts/ticketmaster.js";
-// const locaties = await API_TM();
-const locaties = [{
-            naam: "football",
-            datum: "2023-10-10",
-            url: "https://ticketmaster.com/event/1",
-            venue: "Ajax Stadion",
-            lat: 52.37,
-            lng: 4.89,
-        }, {
-			naam: "concert",
-			datum: "2023-11-15",
-			url: "https://ticketmaster.com/event/2",
-			venue: "Ziggo Dome",
-			lat: 52.31,
-			lng: 4.94,
-		}, {
-			naam: "theater",
-			datum: "2023-12-20",
-			url: "https://ticketmaster.com/event/3",
-			venue: "DeLaMar Theater",
-			lat: 52.35,
-			lng: 4.88,
-		}];
+const locaties = await API_TM();
+// const locaties = [{
+//             naam: "football",
+//             datum: "2023-10-10",
+//             url: "https://ticketmaster.com/event/1",
+//             venue: "Ajax Stadion",
+//             lat: 52.37,
+//             lng: 4.89,
+//         }, {
+// 			naam: "concert",
+// 			datum: "2023-11-15",
+// 			url: "https://ticketmaster.com/event/2",
+// 			venue: "Ziggo Dome",
+// 			lat: 52.31,
+// 			lng: 4.94,
+// 		}, {
+// 			naam: "theater",
+// 			datum: "2023-12-20",
+// 			url: "https://ticketmaster.com/event/3",
+// 			venue: "DeLaMar Theater",
+// 			lat: 52.35,
+// 			lng: 4.88,
+// 		}];
 console.log(locaties);
 
 
@@ -73,9 +73,25 @@ map.setMinZoom(7);
 locaties.forEach(locatie => {
 	console.log(locatie);
 
-	L.marker([locatie.lat, locatie.lng]).addTo(map);
+	const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
 
+	marker.on('click', () => {
+		const title = document.getElementById("eventTitle");
+		const description = document.getElementById("eventDescription");
+		const image = document.getElementById("eventImage");
+		const date = document.getElementById("eventDate");
+		 
+
+		if (title && description && image) {
+			title.textContent = locatie.naam;
+			description.textContent = locatie.description || "Geen beschrijving beschikbaar.";
+			image.src = locatie.image;
+			// date.textContent = locatie.datum;
+		}
+	})
 });
+
+
 
 
 

@@ -31,6 +31,8 @@ export async function API_TM() {
         return {
             naam: event.name,
             datum: event.dates.start.localDate,
+            image: event.images[0].url,
+            description: event.info,
             url: event.url,
             venue: event._embedded.venues[0].name,
             lat: event._embedded.venues[0].location.latitude,
