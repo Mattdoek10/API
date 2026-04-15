@@ -2,7 +2,32 @@
 // @ts-nocheck
 
 import { API_TM } from "../scripts/ticketmaster.js";
-API_TM();
+// const locaties = await API_TM();
+const locaties = [{
+            naam: "football",
+            datum: "2023-10-10",
+            url: "https://ticketmaster.com/event/1",
+            venue: "Ajax Stadion",
+            lat: 52.37,
+            lng: 4.89,
+        }, {
+			naam: "concert",
+			datum: "2023-11-15",
+			url: "https://ticketmaster.com/event/2",
+			venue: "Ziggo Dome",
+			lat: 52.31,
+			lng: 4.94,
+		}, {
+			naam: "theater",
+			datum: "2023-12-20",
+			url: "https://ticketmaster.com/event/3",
+			venue: "DeLaMar Theater",
+			lat: 52.35,
+			lng: 4.88,
+		}];
+console.log(locaties);
+
+
 import SideBar from "../components/SideBar.astro";
 import MainLayout from "../layout.astro/MainLayout.astro";
 
@@ -22,10 +47,39 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 
 		<div id="map"></div>
 
-		<!-- <p>ik heb {todos.length}</p>
-		<ul>
-			{todos.map((todo) => <li>{todo.activity}</li>)}
-		</ul> -->
+		<script type="module" define:vars={{ locaties }}>
+			import L from "https://esm.sh/leaflet@1.9.4";
+
+// Nederland als startpunt
+const netherlandsBounds = [
+  [50.5, 3.0],  // Zuidwest (onder links)
+  [53.7, 7.2]   // Noordoost (boven rechts)
+];
+
+const map = L.map('map' , {
+  maxBounds: netherlandsBounds,
+  maxBoundsViscosity: 1.0
+}).setView([52.37, 4.89], 7);
+
+// Kaart 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  minZoom: 2,
+	maxZoom: 20, 
+}).addTo(map);
+
+map.setMinZoom(7);
+
+
+locaties.forEach(locatie => {
+	console.log(locatie);
+
+	L.marker([locatie.lat, locatie.lng]).addTo(map);
+
+});
+
+
+
+		</script>
 
 </MainLayout>
 
