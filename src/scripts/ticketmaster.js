@@ -32,11 +32,13 @@ export async function API_TM() {
             naam: event.name,
             datum: event.dates.start.localDate,
             image: event.images[0].url,
-            description: event.info,
             url: event.url,
             venue: event._embedded.venues[0].name,
+            adres: event._embedded.venues[0].address.line1,
+            stad: event._embedded.venues[0].city.name,
             lat: event._embedded.venues[0].location.latitude,
             lng: event._embedded.venues[0].location.longitude,
+            genre: event.classifications[0].genre.name
         };
     });
     return locaties;

@@ -6,16 +6,22 @@ import "/public/styles/style.css";
 const { href, text } = Astro.props;
 ---
 <aside id="eventSidebar">
-    <h1 id="eventTitle">Titel Event</h1>
-    <img id="eventImage" src="/" alt="Foto van event" />
-    <p id="eventDescription">Beschrijving van het event.</p>
+    <p id="eventStandaard">Klik op een marker om info te zien</p>
 
+    <img id="eventImage"/>
+
+    <h1 id="eventTitle"></h1>
 
     <ul>
-        <li>Locatie: Amsterdam</li>
-        <li>Datum: 15-03-2023</li>
-        <li>Prijs: €25</li>
+        <li>🎵 <span id="eventGenre"></span></li>
+        <li>📍 <span id="eventVenue"></span></li>
+        <li>🏙️ <span id="eventStad"></span></li>
+        <li>🗺️ <span id="eventAdres"></span></li>
+        <li>📅 <span id="eventDatum"></span></li>
+        <li>🕐 <span id="eventTijd"></span></li>
     </ul>
+
+    <a id="eventUrl" href="#" target="_blank" style="display:none">🎟️ Koop tickets</a>
 </aside>
 
 <style>
@@ -23,30 +29,45 @@ const { href, text } = Astro.props;
         background-color: rgb(255, 177, 177);
         padding: 1rem;
         border-radius: 8px;
-        margin-bottom: 1rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
         z-index: 999;
         height: 90%;
         width: 30%;
+        overflow-y: auto;
 
         h1 {
-            
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
 
         ul {
             list-style: none;
+            margin-bottom: 1rem;
 
             li {
-
+                margin-bottom: 0.4rem;
             }
         }
 
         img {
             width: 100%;
             height: auto;
-            margin-bottom: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        a {
+            display: block;
+            margin-top: 1rem;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
         }
     }
 </style>
