@@ -1,0 +1,14 @@
+---
+// @ts-nocheck
+
+import MainLayout from "../layout.astro/MainLayout.astro";
+import { API_TM } from "../scripts/ticketmaster.js";
+const locaties = await API_TM();
+
+
+---
+<MainLayout>
+    <h1>hallo</h1>
+</MainLayout>
+
+

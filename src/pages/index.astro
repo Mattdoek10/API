@@ -7,12 +7,10 @@ const locaties = await API_TM();
 import SideBar from "../components/SideBar.astro";
 import MainLayout from "../layout.astro/MainLayout.astro";
 
-
 ---
 
 <MainLayout title="API Events">
-	<SideBar />
-
+		<SideBar />	
 		<div id="map"></div>
 
 		<script type="module" define:vars={{ locaties }}>
@@ -39,26 +37,20 @@ map.setMinZoom(7);
 
 
 locaties.forEach(locatie => {
-	console.log(locatie);
+	// console.log(locatie);
+
+	const eventid = locatie.id; // ID van het event
+	console.log(eventid);
 
 	const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
 
 	marker.on('click', () => {
-		// const title = document.getElementById("eventTitle");
-		// const description = document.getElementById("eventDescription");
-		// const image = document.getElementById("eventImage");
-		// const date = document.getElementById("eventDate");
-		 
-
-		// if (title && image) {
-		// 	title.textContent = locatie.naam;
-		// 	// description.textContent = locatie.description || "Geen beschrijving beschikbaar.";
-		// 	image.src = locatie.image;
-		// 	// date.textContent = locatie.datum;
-		// }
 
 		// Verberg de standaard tekst
-        document.getElementById("eventStandaard").style.display = "none";
+        document.getElementById("eventStandaard").style.display = "none"; 
+		document.getElementById("favButton").style.display = "block";
+		document.getElementById("allDetails").style.display = "block";
+		document.getElementById("allDetails").href = `/detailPagina?eventId=${locatie.id}`;
 
         // Vul alle velden in
         document.getElementById("eventTitle").textContent = locatie.naam;
@@ -67,11 +59,13 @@ locaties.forEach(locatie => {
         document.getElementById("eventStad").textContent = locatie.stad;
         document.getElementById("eventAdres").textContent = locatie.adres;
         document.getElementById("eventDatum").textContent = locatie.datum;
-        document.getElementById("eventTijd").textContent = locatie.tijd.slice(0, 5); // "20:00" ipv "20:00:00"
+        document.getElementById("eventTijd").textContent = locatie.tijd ? locatie.tijd.slice(0, 5) : "N/A"; // "20:00" ipv "20:00:00"
 
         // Afbeelding
-        document.getElementById("eventImage").src = locatie.image;
-        // document.getElementById("eventImage").style.display = "block";
+        if (locatie.image) {
+            document.getElementById("eventImage").src = locatie.image;
+			document.getElementById("eventImage").style.display = "block";
+		}
 
         // Ticket link
         document.getElementById("eventUrl").href = locatie.url;
@@ -79,6 +73,10 @@ locaties.forEach(locatie => {
 	})
 });
 
+
+// --------------------------------------
+// Geolocatie van de gebruiker
+// --------------------------------------
 
 // bron: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 // bron2;https://www.w3schools.com/html/html5_geolocation.asp#:~:text=The%20Geolocation%20API%20is%20accessed,information%20(for%20example%20GPS).

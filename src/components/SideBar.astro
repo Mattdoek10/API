@@ -3,12 +3,12 @@
 // import { API_TM } from "../scripts/ticketmaster.js";
 // API_TM();
 import "/public/styles/style.css";
-const { href, text } = Astro.props;
+const { id, href, text } = Astro.props;
 ---
 <aside id="eventSidebar">
     <p id="eventStandaard">Klik op een marker om info te zien</p>
 
-    <img id="eventImage"/>
+    <img id="eventImage" src="" alt="Afbeelding van het evenement">
 
     <h1 id="eventTitle"></h1>
 
@@ -22,6 +22,8 @@ const { href, text } = Astro.props;
     </ul>
 
     <a id="eventUrl" href="#" target="_blank" style="display:none">🎟️ Koop tickets</a>
+    <button id="favButton" style="display: none;">❤️ Add to Favorites</button>
+    <a id="allDetails" style="display: none;">Alle Details !</a>
 </aside>
 
 <style>
@@ -56,6 +58,7 @@ const { href, text } = Astro.props;
             height: auto;
             border-radius: 6px;
             margin-bottom: 0.75rem;
+            display: none;
         }
 
         a {
@@ -68,6 +71,34 @@ const { href, text } = Astro.props;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+        }
+
+        #favButton {
+            display: block;
+            margin-top: 0.5rem;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #allDetails {
+            display: block;
+            margin-top: 0.5rem;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
         }
     }
 </style>
