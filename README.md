@@ -62,15 +62,21 @@ hoe lang duurde het? in totaal 2 uren ongeveer
 
 wat ga ik morgen doen. morgen ga ik mijn idee uitwerken en me content laten laden
 
-## Daily checkout 8/04/2026/ 
+## Daily checkout 15/04/2026/ 
 
-wat heb ik vandaag gedaan? ik heb vandaag mijn idee vastgemaakt. Ik heb namelijk een ander idee, en dit heb ik met de docent besproken en hetblijkt goed te zijn. Mijn idee is dat je met een geaolocation api je huidige locatie kan zien en met een kaart van nederland kan je de verschillende events zien met de ticketmaster api. Daarnaast kan je met local storage de events opslaan en met notification api een melding sturen als de events starten bijvoorbeeld. Ik heb daarnaast de verschillende apis bezocht en prpberen laten werken.
+wat heb ik vandaag gedaan; ik heb vandaag mijn api's goed laten fetchen. ik heb de verschillende evenementen geplaatst op het landkaart en ik heb dit gedaan door de long en lat van de events uit de api te halen. En die dan op het kaart te tonen. Daarna heb ik de pinpoints klikbaar gemaakt en die info laten tonen aan de rechterkant. 
 
-wat heb ik geleerd? ik heb geleerd hoe ik keys kan gebruiken van de api's
+hoelang duurde dit me; het duurde ongeveer 4-5 uren met behulp van de jad.
 
-hoe lang duurde het? in totaal 2 uren ongeveer
+wat heb ik vadaag geleerd. Ik heb geleerd hoe ik dingen kan fetchen en tonen op de kaart, ik heb ook geleerd dat ik binnen me files van api met punten (.) dieper in de file kan zoeken naar dingen. en Ik heb geleerd hoe ik gegevens op de kaart kan laten tonen met pinpoints. dit is namelijk met dit gedeelte text
 
-wat ga ik morgen doen. morgen ga ik mijn idee uitwerken en me content laten laden
+``` javascript 
+
+const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
+
+```
+
+dit is de bron vanwaar ik het heb. Ook werd ik geholpen door jad; https://leafletjs.com/examples/quick-start/
 
 ## Weekly Nerd Johan van Accesibility
 Hij liet een screenreader alles oplezen en heel snel ook, vervolgens vorge hij ons wat we hoorde etc.
@@ -92,6 +98,37 @@ Bevindingen van persoon 2;
 - ze kan niet tegen velle kleuren bij wesbite anders krijgt ze hoofdpijn
 - Ze kan ook niet goed mee als er veel info naast mekaar zit en beetje door elkaar.
 
+## Daily checkout 22/04/2026
+
+wat heb ik vandaag gedaan; ik heb vandaag de detail pagina opgeroepen en laten zien op de website's url. Ik zat hier een tijde mee bezig maar Jad hielp me hiermee. Daarna probeerde ik de code opnieuw te fetchen in me detailspagina zelf. Ook heb ik een beetje gewerkt aan de stijl van de sidepanel.
+
+hoelang duurde dit me; het duurde ongeveer 4-5 uren want ik kon me website niet aan de praat krijgen. Ik kreeg steeds een error en me unieke id kwam niet mee in me url.
+
+wat heb ik vadaag geleerd. Ik heb geleerd hoe me id kan meesturen binnenin me url en die eruit halen om content te tonen op me website.
 
 
+## Daily checkout 23/04/2026
 
+wat heb ik vandaag gedaan; Ik hbe vandaag gezeten aan de detailpagina. Ik heb alle benodigde gegevens gefetch en die dan getoont op de webvsite. Darnaast heb ik die stijl gegevens.
+
+dit duurde me omgeveer 5 uren lang om alles zo goed te krijgen. Ik ben niet helemaal klaar dus daar moet ik nod aan zitten.
+
+Ik heb geleerd hoe ik soort if statment anders kan schrijven;
+
+```javascript
+
+{segment && genre && 
+    <small>{segment} · {genre}</small>}
+```
+
+Hier word er namelijk gezged dat als 'segment' en 'genre' bestaat, toon dan de article en de gegevesn erin. Want normaliter zou je het als dit opschijrven ;
+
+``` javascript
+
+if (segment && genre) {
+    return <small>{segment} · {genre}</small>;
+  }
+
+```
+
+Ook heb ik geleerd hoe ik gegevens kan fetchen met de id. En dat ik vraagtekens kan gebruiken om door delen van de files te lezen. Die vraagtekens (?) heten optional chaining. Ze zorgen ervoor dat je veilig door een object heen kunt gaan zonder errors.
