@@ -32,7 +32,7 @@ const status = statusLabels[data.dates?.status?.code] || data.dates?.status?.cod
 ---
 
 <MainLayout>
-  <main>
+  <body>
 
     <header>
       <p>TICKETMASTER · NEDERLAND</p>
@@ -80,21 +80,20 @@ const status = statusLabels[data.dates?.status?.code] || data.dates?.status?.cod
       <a href={data.url} target="_blank">KOOP TICKETS →</a>
     </div>
 
-  </main>
+  </body>
 </MainLayout>
 
 <style>
 
-main {
+body {
   width: 340px;
   margin: 3rem auto;
   font-family: 'IBM Plex Mono', monospace;
   border-radius: 16px;
-  overflow: hidden;
 }
 
 header {
-  background: linear-gradient(135deg, #c8f0f8, #e8d5f5, #fde8c8, #d5f5e8, #c8d5f8);
+  background: linear-gradient(135deg in hsl, #c8f0f8, #e8d5f5, #fde8c8, #d5f5e8, #c8d5f8);
   padding: 1.5rem;
   text-align: center;
 }

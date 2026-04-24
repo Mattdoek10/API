@@ -5,7 +5,7 @@
 import "/public/styles/style.css";
 const { id, href, text } = Astro.props;
 ---
-<aside id="eventSidebar">
+<aside id="eventSidebar" display="none">
     <p id="eventStandaard">Klik op een marker om info te zien</p>
 
     <img id="eventImage" src="" alt="Afbeelding van het evenement">
@@ -21,14 +21,15 @@ const { id, href, text } = Astro.props;
         <li>🕐 <span id="eventTijd"></span></li>
     </ul>
 
-    <a id="eventUrl" href="#" target="_blank" style="display:none">🎟️ Koop tickets</a>
-    <button id="favButton" style="display: none;">❤️ Add to Favorites</button>
-    <a id="allDetails" style="display: none;">Alle Details !</a>
+    <a id="eventUrl" href="#" target="_blank">Koop tickets</a>
+    <button id="favButton" >Add to Favorites</button>
+    <a id="allDetails" >Alle Details !</a>
 </aside>
 
 <style>
     aside {
-        background-color: rgb(255, 177, 177);
+        background: #f5f0e8;
+        border: 2px dashed black;
         padding: 1rem;
         border-radius: 8px;
         position: absolute;
@@ -38,7 +39,9 @@ const { id, href, text } = Astro.props;
         height: 90%;
         width: 30%;
         overflow-y: auto;
-
+        display: none;
+        font-family: 'Bebas Neue', sans-serif;
+        
         h1 {
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
@@ -62,10 +65,9 @@ const { id, href, text } = Astro.props;
         }
 
         a {
-            display: block;
             margin-top: 1rem;
-            background: #111;
-            color: white;
+            color: black;
+            border: 2px solid black;
             text-align: center;
             padding: 0.6rem;
             border-radius: 8px;
@@ -74,10 +76,9 @@ const { id, href, text } = Astro.props;
         }
 
         #favButton {
-            display: block;
             margin-top: 0.5rem;
-            background: #111;
-            color: white;
+            border: 2px solid black;
+            color: black;
             text-align: center;
             padding: 0.6rem;
             border-radius: 8px;
@@ -85,20 +86,21 @@ const { id, href, text } = Astro.props;
             font-weight: bold;
             width: 100%;
             cursor: pointer;
+            background: #f5f0e8;
         }
 
         #allDetails {
-            display: block;
             margin-top: 0.5rem;
-            background: #111;
-            color: white;
+            color: black;
+            border: 2px solid black;
             text-align: center;
             padding: 0.6rem;
             border-radius: 8px;
-            text-decoration: none;
             font-weight: bold;
             width: 100%;
             cursor: pointer;
+            background: linear-gradient(135deg in hsl, #c8f0f8, #e8d5f5, #fde8c8, #d5f5e8, #c8d5f8);
+
         }
     }
 </style>

@@ -28,10 +28,17 @@ const map = L.map('map' , {
 }).setView([52.37, 4.89], 7);
 
 // Kaart 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// bron; https://leaflet-extras.github.io/leaflet-providers/preview/
+L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png', {
   minZoom: 2,
 	maxZoom: 20, 
 }).addTo(map);
+
+// var Thunderforest_MobileAtlas = L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey={apikey}', {
+// 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// 	apikey: '<your apikey>',
+// 	maxZoom: 22
+// });.addto(map);
 
 map.setMinZoom(7);
 
@@ -47,6 +54,7 @@ locaties.forEach(locatie => {
 	marker.on('click', () => {
 
 		// Verberg de standaard tekst
+		document.getElementById("eventSidebar").style.display = "block";
         document.getElementById("eventStandaard").style.display = "none"; 
 		document.getElementById("favButton").style.display = "block";
 		document.getElementById("allDetails").style.display = "block";
