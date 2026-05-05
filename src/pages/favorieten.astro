@@ -1,0 +1,232 @@
+---
+import MainLayout from "../layout.astro/MainLayout.astro";
+---
+
+<MainLayout title="Mijn Favorieten">
+
+    <div class="algemeenFavInfo">
+        <h1>Mijn Favorieten</h1>
+        <ul id="favorietenLijst"></ul>
+    </div>
+
+    <script>
+        const favorieten = JSON.parse(localStorage.getItem("favorieten") || "[]");
+        const lijst = document.getElementById("favorietenLijst");
+
+        if (favorieten.length === 0) {
+            lijst.innerHTML = "<p>Je hebt nog geen favorieten opgeslagen.</p>";
+        } else {
+            favorieten.forEach(event => {
+                const naarCode = event.stad.slice(0, 3).toUpperCase();
+
+                lijst.innerHTML += `
+                    <li class="ticket">
+                        <section class="ticketBody">
+                            <header>
+                                <span>✦ Event Ticket</span>
+                                <span>Boarding Pass</span>
+                            </header>
+                            <section class="route">
+                                <div>
+                                    <p class="code">AMS</p>
+                                    <p class="stad">Nederland</p>
+                                </div>
+                                <p class="vliegtuig">✈</p>
+                                <div class="rechts">
+                                    <p class="code">${naarCode}</p>
+                                    <p class="stad">${event.stad}</p>
+                                </div>
+                            </section>
+                            <hr>
+                            <p class="naamEvent">${event.naam}</p>
+                            <ul class="meta">
+                                <li>Datum<span>${event.datum}</span></li>
+                                <li>Tijd<span>${event.tijd ? event.tijd.slice(0,5) : "N/A"}</span></li>
+                                <li>Genre<span>${event.genre}</span></li>
+                                <li class="full">Venue<span>${event.venue}</span></li>
+                            </ul>
+                        </section>
+                        <section class="ticketStub">
+                            <span class="stubCode">${naarCode}</span>
+                            <a href="/detailPagina?eventId=${event.id}">Details</a>
+                            <button class="verwijder">X</button>
+                        </section>
+                    </li>
+                `;
+            });
+        }
+    </script>
+
+    <!-- met ai de is:global text bij gedaan want me css ging niet goed in de favorieten pagina, waarschijnlijk omdat ik in de mainlayout een global button had staan en die ook in de css had staan. dus ik heb die global button weggehaald en toen ging het wel goed. maar nu is die css ook weg voor de favorieten pagina dus vandaar dat ik die is:global text erbij heb gedaan. -->
+    <style is:global>
+        .algemeenFavInfo {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        h1 { 
+            font-size: 2rem; margin-bottom: 1.5rem; 
+        }
+
+        #favorietenLijst {
+            list-style: none;
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* gap: 1rem; */
+        }
+
+        .ticket {
+            display: flex;
+            border-radius: 12px;
+        }
+
+        .ticketBody {
+            background: linear-gradient(135deg in hsl, #c8f0f8, #e8d5f5, #fde8c8, #d5f5e8, #c8d5f8);
+            color: black;
+            border-radius: 12px 0 0 12px;
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-family: monospace;
+        }
+
+        .ticketBody header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .route {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            padding: 0;
+        }
+
+        .code {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .stad {
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .rechts { 
+            text-align: right; 
+        }
+
+        .vliegtuig {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .naamEvent {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .meta {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .meta li { 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .full { 
+            grid-column: 1 / -1; 
+        }
+
+        .meta  {
+            font-size: 9px;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta span { 
+            font-size: 13px; 
+            font-weight: 600;
+            color: #000;
+        }
+
+        .ticketStub {
+            background: #f5f0e8;
+            border-left: 2px dashed #000000;
+            border-radius: 0 12px 12px 0;
+            width: 110px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            font-family: monospace;
+        }
+
+        .stubCode {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 3px;
+            transform: rotate(270deg);
+            padding: 5px 0;
+        }
+
+        .ticketStub a {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: #000;
+            text-decoration: none;
+            border: 1.5px solid #000;
+            border-radius: 6px;
+            padding: 4px 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .ticketStub a:hover { 
+            background: linear-gradient(135deg in hsl, #c8f0f8, #e8d5f5, #fde8c8, #d5f5e8, #c8d5f8);
+            color: #000; 
+        }
+
+        .verwijder {
+            background: none;
+            border: 1.5px solid #000;
+            border-radius: 6px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .verwijder:hover { 
+            background: #000; 
+            color: white;
+        }
+    </style>
+
+</MainLayout>

@@ -12,6 +12,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 <MainLayout title="API Events">
 		<SideBar />	
 		<div id="map"></div>
+		<a id="favGlobalButton" href="/favorieten">❤️</a>
 
 		<script type="module" define:vars={{ locaties }}>
 			import L from "https://esm.sh/leaflet@1.9.4";
@@ -42,6 +43,8 @@ L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png', {
 
 map.setMinZoom(7);
 
+// huidige event bij houden
+let currentLocatie = null;
 
 locaties.forEach(locatie => {
 	// console.log(locatie);
@@ -52,6 +55,8 @@ locaties.forEach(locatie => {
 	const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
 
 	marker.on('click', () => {
+		// Sla het huidige event op
+		currentLocatie = locatie;
 
 		// Verberg de standaard tekst
 		document.getElementById("eventSidebar").style.display = "block";
@@ -81,6 +86,25 @@ locaties.forEach(locatie => {
 	})
 });
 
+// Favorieten knop
+document.getElementById("favButton").addEventListener("click", () => {
+	if (!currentLocatie) return;
+	
+	// Haal huidige favorieten op uit localStorage
+	let favorieten = JSON.parse(localStorage.getItem("favorieten") || "[]");
+	
+	// Check of event al in favorieten zit
+	const bestaatAl = favorieten.some(fav => fav.id === currentLocatie.id);
+	
+	if (bestaatAl) {
+		alert("Dit event is al in je favorieten!");
+	} else {
+		// Voeg event toe aan favorieten
+		favorieten.push(currentLocatie);
+		localStorage.setItem("favorieten", JSON.stringify(favorieten));
+		alert("Event opgeslagen in favorieten!");
+	}
+});
 
 // --------------------------------------
 // Geolocatie van de gebruiker
