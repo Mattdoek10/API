@@ -30,9 +30,16 @@ const map = L.map('map' , {
 
 // Kaart 
 // bron; https://leaflet-extras.github.io/leaflet-providers/preview/
-L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png', {
-  minZoom: 2,
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  	minZoom: 2,
 	maxZoom: 20, 
+ }).addTo(map);
+
+ var Stadia_StamenTonerLabels = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}{r}.{ext}', {
+  ext: 'png',
+  minZoom: 0,
+  maxZoom: 20,
+  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
 }).addTo(map);
 
 // var Thunderforest_MobileAtlas = L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey={apikey}', {

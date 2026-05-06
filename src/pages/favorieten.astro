@@ -1,4 +1,5 @@
 ---
+// @ts-nocheck
 import MainLayout from "../layout.astro/MainLayout.astro";
 ---
 
@@ -24,14 +25,14 @@ import MainLayout from "../layout.astro/MainLayout.astro";
                         <section class="ticketBody">
                             <header>
                                 <span>✦ Event Ticket</span>
-                                <span>Boarding Pass</span>
+                                <span>VIP Pass</span>
                             </header>
                             <section class="route">
                                 <div>
                                     <p class="code">AMS</p>
                                     <p class="stad">Nederland</p>
                                 </div>
-                                <p class="vliegtuig">✈</p>
+                                <p class="tussenSter">✦</p>
                                 <div class="rechts">
                                     <p class="code">${naarCode}</p>
                                     <p class="stad">${event.stad}</p>
@@ -74,12 +75,13 @@ import MainLayout from "../layout.astro/MainLayout.astro";
             list-style: none;
             /* display: flex; */
             /* flex-direction: column; */
-            /* gap: 1rem; */
+            /* gap: 5em; */
         }
 
         .ticket {
             display: flex;
             border-radius: 12px;
+            padding: 1em 0;
         }
 
         .ticketBody {
@@ -126,7 +128,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
             text-align: right; 
         }
 
-        .vliegtuig {
+        .tussenSter {
             flex: 1;
             text-align: center;
             font-size: 18px;
