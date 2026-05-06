@@ -31,6 +31,10 @@ const statusLabels = {
 };
 const status =
   statusLabels[data.dates?.status?.code] || data.dates?.status?.code;
+
+const seatMap = data.seatmap?.staticUrl;
+const eventDescription = data.description || "Geen beschrijving beschikbaar.";
+const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinformatie beschikbaar.";
 ---
 
 <MainLayout>
@@ -47,8 +51,6 @@ const status =
     </div>
 
     <div id="ticketStyle">
-
-      <div class="tussenTicket"></div>
 
       <div class="divBorder">
       <section>
@@ -81,6 +83,26 @@ const status =
         <a href={data.url} target="_blank">KOOP TICKETS →</a>
       </div>
       </div>
+    </div>
+
+    <div class="extraInfo">
+    <section class="beschrijvingSection">
+      <h2>Beschrijving</h2>
+      <p>{eventDescription}</p>
+    </section>
+
+    <section class="toegankelijkheidSection">
+      <h2>Toegankelijkheid</h2>
+      <p>{accessibilityInfo}</p>
+    </section>
+
+    <section class="plattegrondEvent">
+
+      {seatMap && (
+          <h2>Plattegrond</h2>
+          <img src={seatMap} alt="Plattegrond van de locatie" />
+      )}
+    </section>
     </div>
 
   </body>
@@ -158,15 +180,9 @@ const status =
   /* Ticket */
   #ticketStyle {
     max-width: 900px;
-    padding: 0 2em;
     margin: -80px auto 3rem;
     position: relative;
     z-index: 100;
-  }
-
-  .tussenTicket {
-    border-top: 2px dashed #444;
-    width: 100%;
   }
 
   .divBorder {
@@ -177,14 +193,13 @@ const status =
   section {
     background: #f5f0e8;
     padding: 1.25rem;
-    /* border-radius: 12px; */
   }
 
   section:first-of-type {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px dashed #ccc;
     padding-bottom: 1rem;
   }
 
@@ -192,7 +207,6 @@ const status =
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    padding-top: 1rem;
   }
 
   article small {
@@ -243,7 +257,7 @@ const status =
   .ticketResale {
     background: #f5f0e8;
     padding: 0.75rem 1.25rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px dashed #ccc;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -260,5 +274,30 @@ const status =
     font-size: 16px;
     color: #111;
     text-decoration: none;
+  }
+
+  .extraInfo {
+    max-width: 900px;
+    margin: 0 auto 3em;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .beschrijvingSection, .toegankelijkheidSection {
+    max-width: 900px;
+        display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 1rem;
+  }
+
+  .plattegrondEvent {
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
   }
 </style>
