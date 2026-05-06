@@ -11,6 +11,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
     </div>
 
     <script>
+        // @ts-nocheck
         const favorieten = JSON.parse(localStorage.getItem("favorieten") || "[]");
         const lijst = document.getElementById("favorietenLijst");
 

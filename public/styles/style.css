@@ -31,6 +31,6 @@
     background: #fde8f0;
 }
 
-/* h1 {
-    color: red;
-} */
+.customMarker {
+    filter: hue-rotate(150deg);
+}

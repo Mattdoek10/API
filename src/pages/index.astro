@@ -6,141 +6,155 @@ const locaties = await API_TM();
 
 import SideBar from "../components/SideBar.astro";
 import MainLayout from "../layout.astro/MainLayout.astro";
-
 ---
 
 <MainLayout title="API Events">
-		<SideBar />	
-		<div id="map"></div>
-		<a id="favGlobalButton" href="/favorieten">❤️</a>
+	<SideBar />
+	<div id="map"></div>
+	<a id="favGlobalButton" href="/favorieten">❤️</a>
 
-		<script type="module" define:vars={{ locaties }}>
-			import L from "https://esm.sh/leaflet@1.9.4";
+	<script type="module" define:vars={{ locaties }}>
+		import L from "https://esm.sh/leaflet@1.9.4";
 
-// Nederland als startpunt
-const netherlandsBounds = [
-  [50.5, 3.0],  // Zuidwest (onder links)
-  [53.7, 7.2]   // Noordoost (boven rechts)
-];
+		// Nederland als startpunt
+		const netherlandsBounds = [
+			[50.5, 3.0],
+			[53.7, 7.2],
+		];
 
-const map = L.map('map' , {
-  maxBounds: netherlandsBounds,
-  maxBoundsViscosity: 1.0
-}).setView([52.37, 4.89], 7);
+		const map = L.map("map", {
+			maxBounds: netherlandsBounds,
+			maxBoundsViscosity: 1.0,
+		}).setView([52.37, 4.89], 7);
 
-// Kaart 
-// bron; https://leaflet-extras.github.io/leaflet-providers/preview/
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-  	minZoom: 2,
-	maxZoom: 20, 
- }).addTo(map);
+		// Kaart
+		// bron; https://leaflet-extras.github.io/leaflet-providers/preview/
+		L.tileLayer(
+			"https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+			{
+				minZoom: 2,
+				maxZoom: 20,
+			},
+		).addTo(map);
 
- var Stadia_StamenTonerLabels = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}{r}.{ext}', {
-  ext: 'png',
-  minZoom: 0,
-  maxZoom: 20,
-  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-}).addTo(map);
+		var Stadia_StamenTonerLabels = L.tileLayer(
+			"https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}{r}.{ext}",
+			{
+				ext: "png",
+				minZoom: 0,
+				maxZoom: 20,
+				attribution:
+					'&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+			},
+		).addTo(map);
 
-// var Thunderforest_MobileAtlas = L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey={apikey}', {
-// 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// 	apikey: '<your apikey>',
-// 	maxZoom: 22
-// });.addto(map);
+		// var Thunderforest_MobileAtlas = L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey={apikey}', {
+		// 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		// 	apikey: '<your apikey>',
+		// 	maxZoom: 22
+		// });.addto(map);
 
-map.setMinZoom(7);
+		map.setMinZoom(7);
 
-// huidige event bij houden
-let currentLocatie = null;
+		// huidige event bij houden
+		let currentLocatie = null;
 
-locaties.forEach(locatie => {
-	// console.log(locatie);
+		locaties.forEach((locatie) => {
+			// console.log(locatie);
 
-	const eventid = locatie.id; // ID van het event
-	console.log(eventid);
+			const eventid = locatie.id; // ID van het event
+			console.log(eventid);
 
-	const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
+			const marker = L.marker([locatie.lat, locatie.lng]).addTo(map);
+			marker._icon.classList.add("customMarker");
 
-	marker.on('click', () => {
-		// Sla het huidige event op
-		currentLocatie = locatie;
+			marker.on("click", () => {
+				// Sla het huidige event op
+				currentLocatie = locatie;
 
-		// Verberg de standaard tekst
-		document.getElementById("eventSidebar").style.display = "block";
-        document.getElementById("eventStandaard").style.display = "none"; 
-		document.getElementById("favButton").style.display = "block";
-		document.getElementById("allDetails").style.display = "block";
-		document.getElementById("allDetails").href = `/detailPagina?eventId=${locatie.id}`;
+				// Verberg de standaard tekst
+				document.getElementById("eventSidebar").style.display = "block";
+				document.getElementById("eventStandaard").style.display =
+					"none";
+				document.getElementById("favButton").style.display = "block";
+				document.getElementById("allDetails").style.display = "block";
+				document.getElementById("allDetails").href =
+					`/detailPagina?eventId=${locatie.id}`;
 
-        // Vul alle velden in
-        document.getElementById("eventTitle").textContent = locatie.naam;
-        document.getElementById("eventGenre").textContent = locatie.genre;
-        document.getElementById("eventVenue").textContent = locatie.venue;
-        document.getElementById("eventStad").textContent = locatie.stad;
-        document.getElementById("eventAdres").textContent = locatie.adres;
-        document.getElementById("eventDatum").textContent = locatie.datum;
-        document.getElementById("eventTijd").textContent = locatie.tijd ? locatie.tijd.slice(0, 5) : "N/A"; // "20:00" ipv "20:00:00"
+				// Vul alle velden in
+				document.getElementById("eventTitle").textContent =
+					locatie.naam;
+				document.getElementById("eventGenre").textContent =
+					locatie.genre;
+				document.getElementById("eventVenue").textContent =
+					locatie.venue;
+				document.getElementById("eventStad").textContent = locatie.stad;
+				document.getElementById("eventAdres").textContent =
+					locatie.adres;
+				document.getElementById("eventDatum").textContent =
+					locatie.datum;
+				document.getElementById("eventTijd").textContent = locatie.tijd
+					? locatie.tijd.slice(0, 5)
+					: "N/A"; // "20:00" ipv "20:00:00"
 
-        // Afbeelding
-        if (locatie.image) {
-            document.getElementById("eventImage").src = locatie.image;
-			document.getElementById("eventImage").style.display = "block";
+				// Afbeelding
+				if (locatie.image) {
+					document.getElementById("eventImage").src = locatie.image;
+					document.getElementById("eventImage").style.display =
+						"block";
+				}
+
+				// Ticket link
+				document.getElementById("eventUrl").href = locatie.url;
+				document.getElementById("eventUrl").style.display = "block";
+			});
+		});
+
+		// Favorieten knop
+		document.getElementById("favButton").addEventListener("click", () => {
+			if (!currentLocatie) return;
+
+			// Haal huidige favorieten op uit localStorage
+			let favorieten = JSON.parse(
+				localStorage.getItem("favorieten") || "[]",
+			);
+
+			// Check of event al in favorieten zit
+			const bestaatAl = favorieten.some(
+				(fav) => fav.id === currentLocatie.id,
+			);
+
+			if (bestaatAl) {
+				alert("Dit event is al in je favorieten!");
+			} else {
+				// Voeg event toe aan favorieten
+				favorieten.push(currentLocatie);
+				localStorage.setItem("favorieten", JSON.stringify(favorieten));
+				alert("Event opgeslagen in favorieten!");
+			}
+		});
+
+		// --------------------------------------
+		// Geolocatie van de gebruiker
+		// --------------------------------------
+
+		// bron: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+		// bron2;https://www.w3schools.com/html/html5_geolocation.asp#:~:text=The%20Geolocation%20API%20is%20accessed,information%20(for%20example%20GPS).
+		function userLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position) => {
+					const lat = position.coords.latitude;
+					const lng = position.coords.longitude;
+
+					const userMarker = L.marker([lat, lng]).addTo(map);
+					userMarker.bindPopup("Jij bent hier 📍").openPopup();
+					map.setView([lat, lng], 12);
+				});
+			} else {
+				console.log("Geolocation werkt niet in deze browser");
+			}
 		}
 
-        // Ticket link
-        document.getElementById("eventUrl").href = locatie.url;
-        document.getElementById("eventUrl").style.display = "block";
-	})
-});
-
-// Favorieten knop
-document.getElementById("favButton").addEventListener("click", () => {
-	if (!currentLocatie) return;
-	
-	// Haal huidige favorieten op uit localStorage
-	let favorieten = JSON.parse(localStorage.getItem("favorieten") || "[]");
-	
-	// Check of event al in favorieten zit
-	const bestaatAl = favorieten.some(fav => fav.id === currentLocatie.id);
-	
-	if (bestaatAl) {
-		alert("Dit event is al in je favorieten!");
-	} else {
-		// Voeg event toe aan favorieten
-		favorieten.push(currentLocatie);
-		localStorage.setItem("favorieten", JSON.stringify(favorieten));
-		alert("Event opgeslagen in favorieten!");
-	}
-});
-
-// --------------------------------------
-// Geolocatie van de gebruiker
-// --------------------------------------
-
-// bron: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
-// bron2;https://www.w3schools.com/html/html5_geolocation.asp#:~:text=The%20Geolocation%20API%20is%20accessed,information%20(for%20example%20GPS).
-function userLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition((position) => {
-			const lat = position.coords.latitude;
-			const lng = position.coords.longitude;
-
-			const userMarker = L.marker([lat, lng]).addTo(map);
-			userMarker.bindPopup("Jij bent hier 📍").openPopup();
-			map.setView([lat, lng], 12);
-		});
-	} else {
-		console.log("Geolocation werkt niet in deze browser");
-	}
-};
-
-userLocation();
-
-
-
-
-
-		</script>
-
+		userLocation();
+	</script>
 </MainLayout>
-

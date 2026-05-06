@@ -1,6 +1,6 @@
 
 export async function API_TM() {
-    
+
     const ticketmasterApi = import.meta.env.TM_KEY;
 
     const base = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=NL&apikey=" + ticketmasterApi;

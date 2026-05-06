@@ -24,87 +24,241 @@ const maand = datum.toLocaleString("nl-NL", { month: "short" }).toUpperCase();
 const tijd = data.dates?.start?.localTime.slice(0, 5);
 
 const statusLabels = {
-    onsale: "ON SALE", 
-    offsale: "UITVERKOCHT",
-    canceled: "GEANNULEERD", 
-    postponed: "UITGESTELD",
+  onsale: "ON SALE",
+  offsale: "UITVERKOCHT",
+  canceled: "GEANNULEERD",
+  postponed: "UITGESTELD",
 };
-const status = statusLabels[data.dates?.status?.code] || data.dates?.status?.code;
+const status =
+  statusLabels[data.dates?.status?.code] || data.dates?.status?.code;
 ---
 
 <MainLayout>
   <body>
 
     <div class="coverImage">
-      <img src={image} alt={data.name}>
+      <img src={image} alt={data.name} />
+      <header>
+        <p>TICKETMASTER · NEDERLAND</p>
+        <h1>{data.name}</h1>
+        <p>+ LIVE IN CONCERT +</p>
+        {segment && genre && <small>{segment} · {genre}</small>}
+      </header>
     </div>
 
-    <header>
-      <p>TICKETMASTER · NEDERLAND</p>
-      <h1>{data.name}</h1>
-      <p>+ LIVE IN CONCERT +</p>
-      <!-- bron voor small text ; https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/small -->
-      {segment && genre && <small>{segment} · {genre}</small>}
-    </header>
+    <div id="ticketStyle">
 
-    <div class="tussenTicket"></div>
+      <div class="tussenTicket"></div>
 
-    <section>
-
-      <article>
-        <small>LOCATIE</small>
-        {venue && <h2>{venue.name}</h2>}
-        {venue && <p>{venue.address?.line1}, {venue.city?.name}</p>}
-      </article>
-
-      <p class="dagMaand">
-        <strong>{dag}</strong>
-        <span>{maand}</span>
-      </p>
-
-    </section>
-
-    <section>
-
-      {tijd && (
+      <div class="divBorder">
+      <section>
         <article>
-          <small>AANVANG</small>
-          <strong>{tijd}</strong>
+          <small>LOCATIE</small>
+          {venue && <h2>{venue.name}</h2>}
+          {venue && <p>{venue.address?.line1}, {venue.city?.name}</p>}
         </article>
-      )}
+        <p class="dagMaand">
+          <strong>{dag}</strong>
+          <span>{maand}</span>
+        </p>
+      </section>
 
-      <article>
-        <small>STATUS</small>
-        <strong>{status}</strong>
-      </article>
-      
-    </section>
+      <section>
+        {tijd && (
+          <article>
+            <small>AANVANG</small>
+            <strong>{tijd}</strong>
+          </article>
+        )}
+        <article>
+          <small>STATUS</small>
+          <strong>{status}</strong>
+        </article>
+      </section>
 
-    <div class="ticketResale">
-      <small>UNAUTHORISED RESALE PROHIBITED</small>
-      <a href={data.url} target="_blank">KOOP TICKETS →</a>
+      <div class="ticketResale">
+        <small>UNAUTHORISED RESALE PROHIBITED</small>
+        <a href={data.url} target="_blank">KOOP TICKETS →</a>
+      </div>
+      </div>
     </div>
 
   </body>
 </MainLayout>
 
 <style>
-body {
-    font-family: 'Bebas Neue', sans-serif;
-    padding: 2rem;
-    background: #f5f0e8;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    .coverImage {
-        /* width: 100%; */
-        /* height: 20em; */
-        /* overflow: hidden; */
-        /* object-fit: cover; */
-        img {
-            width: 100%;
-            height: 30em;
-            object-fit: cover;
-            object-position: top;
-        }
+  body {
+    font-family: "Bebas Neue", sans-serif;
+    /* background: #f5f0e8; */
+  }
+
+  /* foto met tekst erop */
+  .coverImage {
+    position: relative;
+    width: 100%;
+    height: 30em;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      z-index: 0;
     }
-}
+
+    header {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.40);
+
+      h1 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 72px;
+        line-height: 1;
+        color: #fff;
+        margin: 0.25rem 0;
+        letter-spacing: -2px;
+      }
+
+      p {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0.25rem 0;
+      }
+
+      small {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        font-size: 10px;
+        letter-spacing: 2px;
+        padding: 3px 10px;
+        color: #fff;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+
+  /* Ticket */
+  #ticketStyle {
+    max-width: 900px;
+    padding: 0 2em;
+    margin: -80px auto 3rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .tussenTicket {
+    border-top: 2px dashed #444;
+    width: 100%;
+  }
+
+  .divBorder {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  section {
+    background: #f5f0e8;
+    padding: 1.25rem;
+    /* border-radius: 12px; */
+  }
+
+  section:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+
+  section:last-of-type {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding-top: 1rem;
+  }
+
+  article small {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #888;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  article strong {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+  }
+
+  section:first-of-type article h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: black;
+    margin: 0;
+  }
+
+  section:first-of-type article p {
+    font-size: 9px;
+    color: #666;
+    margin: 2px 0 0;
+    letter-spacing: 1px;
+  }
+
+  .dagMaand {
+    text-align: right;
+  }
+
+  .dagMaand strong {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: #111;
+    line-height: 1;
+    display: block;
+  }
+
+  .dagMaand span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #111;
+  }
+
+  .ticketResale {
+    background: #f5f0e8;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ticketResale small {
+    font-size: 8px;
+    color: #999;
+    letter-spacing: 1px;
+  }
+
+  .ticketResale a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: #111;
+    text-decoration: none;
+  }
 </style>
