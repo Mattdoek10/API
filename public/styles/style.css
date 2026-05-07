@@ -47,3 +47,12 @@
     top: 1rem;
     color:#fde8f0
 }
+
+@media (max-width: 768px) {
+    #favGlobalButton {
+        top: 1rem;
+        right: 1rem;
+        bottom: auto;
+        left: auto;
+    }
+}
