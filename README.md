@@ -280,7 +280,7 @@ Hierna schreef ik dan de html met innerHTML, zodat dit word getoont als je op de
 
 Vervolgens ben ik aan de slag gegaan met stijlen van de pagina. Ik heb namelijk inspiratie genomen van een vliegtuig ticket, en ik wou dat elke event er ongeveer als dat moest uitzien. dus probeerde ik het na te maken. IK kwam uit eindelijk toch uit.
 
-![foto van favorieten pagina](images/favTicket.png)
+![foto van favorieten pagina](public/images/favTicket.png)
 
 
 Vervolgens ben ik verder gegaan met mijn detailpagina, want dit was eigenlijk niet mooi genoeg. bij de detail pagina heb ik een kleine stuk html erbij geschreven want ik had al veel html , maar de stijl was niet goed. DUs ik heb daarna info opgehaald zoals; toegankelijkheid info, artiesten, verkoopdata, postcode, land, subgenre en tijdzone informatie. Ik ben daarnq aan de slag gegaan met stijlen. Ik hbe de inspiratie genomen van deze website 
