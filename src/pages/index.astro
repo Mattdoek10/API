@@ -48,19 +48,12 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 			},
 		).addTo(map);
 
-		// var Thunderforest_MobileAtlas = L.tileLayer('https://api.thunderforest.com/mobile-atlas/{z}/{x}/{y}{r}.png?apikey={apikey}', {
-		// 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-		// 	apikey: '<your apikey>',
-		// 	maxZoom: 22
-		// });.addto(map);
-
 		map.setMinZoom(7);
 
 		// huidige event bij houden
 		let currentLocatie = null;
 
 		locaties.forEach((locatie) => {
-			// console.log(locatie);
 
 			const eventid = locatie.id; // ID van het event
 			console.log(eventid);
@@ -74,8 +67,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 
 				// Verberg de standaard tekst
 				document.getElementById("eventSidebar").style.display = "block";
-				document.getElementById("eventStandaard").style.display =
-					"none";
+				document.getElementById("eventStandaard").style.display = "none";
 				document.getElementById("favButton").style.display = "block";
 				document.getElementById("allDetails").style.display = "block";
 				document.getElementById("allDetails").href =
@@ -120,6 +112,8 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 			);
 
 			// Check of event al in favorieten zit
+			// some() loopt over alle elementen in de arra, totdat eentje vindt dat vldoet dus 
+			// of er al een favoriet is met dezelfde ID als het huidige event.
 			const bestaatAl = favorieten.some(
 				(fav) => fav.id === currentLocatie.id,
 			);
