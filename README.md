@@ -286,10 +286,10 @@ Vervolgens ben ik aan de slag gegaan met stijlen van de pagina. Ik heb namelijk 
 Vervolgens ben ik verder gegaan met mijn detailpagina, want dit was eigenlijk niet mooi genoeg. bij de detail pagina heb ik een kleine stuk html erbij geschreven want ik had al veel html , maar de stijl was niet goed. DUs ik heb daarna info opgehaald zoals; toegankelijkheid info, artiesten, verkoopdata, postcode, land, subgenre en tijdzone informatie. Ik ben daarnq aan de slag gegaan met stijlen. Ik hbe de inspiratie genomen van deze website 
 https://cdn.dribbble.com/userupload/24387133/file/original-ac99957b129dd2c6d3906658f71455dd.png?resize=1504x1128&vertical=center 
 
-![screenshot van een website](images/screenshot.png)
+![screenshot van een website](public\images\screenshot.png)
 
 nu ziet het er zo uit na stijlen
-![screenshot van detailpagina](images/SSDetailpagina.png)
+![screenshot van detailpagina](public\images\SSDetailpagina.png)
 
 
 Na dit gedaan te hebben ben ik opzoek gegaan naar hoe ik me pinpointers kan aanpassen, want ik vond de blauwe kleer een beetje verwarrend voor de huidige locatie en event locaties. ik ben dit gaan opzoeken, ik vroeg aan ai hoe ik de marker kan costumizen en kwam hier uit, hij zei dat ik een class moet toevoegen en dit dan stijlen met filter in css.
@@ -311,7 +311,7 @@ En bij me stijling had ik alleen dit gezet;
 
  Hierna ben ik aan de slag gegaan met kleine details om me websit een beetje mooier te maken. Ik heb de sidebar de stijl aangepast, het ziet er nu zo uit;
 
- ![Screenshot van sidebar in me website](images/sidebarSS.png)
+ ![Screenshot van sidebar in me website](public\images\sidebarSS.png)
 
  Het had al veel stijl dus ik had alleen de middenstukje aangepast met een grid. 
 
@@ -414,7 +414,7 @@ Dit project heeft me veel geholpen om te groeien als eeb ontwikkelaar, omdat ik 
   - https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
   - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 
-### 9. JavaScript array- en taalfeatures
+### 9. JavaScript array en taalfeatures
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
 - Arrow functions `=>`
 - Template strings / template literals
