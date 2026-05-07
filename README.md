@@ -311,7 +311,7 @@ En bij me stijling had ik alleen dit gezet;
 
  Hierna ben ik aan de slag gegaan met kleine details om me websit een beetje mooier te maken. Ik heb de sidebar de stijl aangepast, het ziet er nu zo uit;
 
- ![Screenshot van sidebar in me website](public\images\sidebarSS.png)
+ ![Screenshot van sidebar in me website](public/images/sidebarSS.png)
 
  Het had al veel stijl dus ik had alleen de middenstukje aangepast met een grid. 
 
