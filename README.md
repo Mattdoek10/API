@@ -438,6 +438,3 @@ Dit project heeft me veel geholpen om te groeien als eeb ontwikkelaar, omdat ik 
         })
 
 - met ai de is:global text bij gedaan want me css ging niet goed in de favorieten pagina, waarschijnlijk omdat ik in de mainlayout een global button had staan en die ook in de css had staan. dus ik heb die global button weggehaald en toen ging het wel goed. maar nu is die css ook weg voor de favorieten pagina dus vandaar dat ik die is:global text erbij heb gedaan.
-
-
-
