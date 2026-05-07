@@ -342,6 +342,9 @@ En bij me stijling had ik alleen dit gezet;
 
  ```
 
+ ### Foto eind resultaat
+ ![Foto eind resultaat scherm](public/images/SSeind.png)
+
 Wat heb ik geleerd;
 
 Ik heb geleerd hoe ik de localStorage API kan gebruiken om data op te slaan in de browser. Dus dat ik met `localStorage.setItem` iets kan opslaan en met `localStorage.getItem` het weer kan ophalen. Ook heb ik geleerd dat je objecten eerst moet omzetten naar een string met `JSON.stringify` voordat je het kan opslaan, en weer terug met `JSON.parse` als je het ophaalt.
