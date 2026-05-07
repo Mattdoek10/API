@@ -4,7 +4,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
 ---
 
 <MainLayout title="Mijn Favorieten">
-
+    <button class="terugKnop" onclick="history.back()">← Terug</button>
     <div class="algemeenFavInfo">
         <h1>Mijn Favorieten</h1>
         <ul id="favorietenLijst"></ul>
@@ -25,7 +25,7 @@ import MainLayout from "../layout.astro/MainLayout.astro";
                     <li class="ticket">
                         <section class="ticketBody">
                             <header>
-                                <span>✦ Event Ticket</span>
+                                <span>Event Ticket</span>
                                 <span>VIP Pass</span>
                             </header>
                             <section class="route">
@@ -51,16 +51,40 @@ import MainLayout from "../layout.astro/MainLayout.astro";
                         <section class="ticketStub">
                             <span class="stubCode">${naarCode}</span>
                             <a href="/detailPagina?eventId=${event.id}">Details</a>
-                            <button class="verwijder">X</button>
+                            <button class="verwijder" data-event-id="${event.id}">X</button>
                         </section>
                     </li>
                 `;
             });
         }
+
+//         met ai laten werken bron; dit heb ik, maar waarom werkt het niet?
+
+//            document.querySelectorAll(".verwijder").forEach(verwijderKnop => {
+//             verwijderKnop.addEventListener("click", () => {
+//                 const id = verwijderKnop.target.dataset.eventId;
+//                 let removeFavorieten = localStorage.removeItem("favorieten")
+//             })
+//         })
+
+
+        document.querySelectorAll(".verwijder").forEach(verwijderKnop => {
+            verwijderKnop.addEventListener("click", () => {
+                const id = verwijderKnop.dataset.eventId;
+                let favorieten = JSON.parse(localStorage.getItem("favorieten") || "[]");
+                favorieten = favorieten.filter(event => event.id !== id);
+                localStorage.setItem("favorieten", JSON.stringify(favorieten));
+                location.reload();
+            })
+        })
     </script>
 
     <!-- met ai de is:global text bij gedaan want me css ging niet goed in de favorieten pagina, waarschijnlijk omdat ik in de mainlayout een global button had staan en die ook in de css had staan. dus ik heb die global button weggehaald en toen ging het wel goed. maar nu is die css ook weg voor de favorieten pagina dus vandaar dat ik die is:global text erbij heb gedaan. -->
     <style is:global>
+
+        .terugKnop {
+            color: black
+        }
         .algemeenFavInfo {
             max-width: 700px;
             margin: 2rem auto;
@@ -152,22 +176,14 @@ import MainLayout from "../layout.astro/MainLayout.astro";
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 0.5rem;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .meta li { 
             display: flex; 
             flex-direction: column; 
-        }
-
-        .full { 
-            grid-column: 1 / -1; 
-        }
-
-        .meta  {
-            font-size: 9px;
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .meta span { 

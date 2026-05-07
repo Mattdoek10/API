@@ -34,3 +34,16 @@
 .customMarker {
     filter: hue-rotate(150deg);
 }
+
+.terugKnop {
+    border: none;
+    background-color: transparent;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000;
+    left: 1rem;
+    top: 1rem;
+    color:#fde8f0
+}

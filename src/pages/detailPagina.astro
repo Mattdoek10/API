@@ -33,12 +33,28 @@ const status =
   statusLabels[data.dates?.status?.code] || data.dates?.status?.code;
 
 const seatMap = data.seatmap?.staticUrl;
-const eventDescription = data.description || "Geen beschrijving beschikbaar.";
-const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinformatie beschikbaar.";
+const accessibilityInfo =
+  data.accessibility?.info || "Geen toegankelijkheidsinformatie beschikbaar.";
+const volledigeDatum = datum.toLocaleString("nl-NL", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const eventDescription =
+  data.description ||
+  `${data.name} vindt plaats op ${volledigeDatum} om ${tijd} uur in ${venue?.name}, gelegen aan ${venue?.address?.line1} in ${venue?.city?.name}. ${genre ? `Dit event valt onder het genre ${genre}.` : ""} ${prijs ? `Tickets zijn beschikbaar vanaf €${prijs.min}.` : ""} Kijk voor meer informatie en tickets op de officiële Ticketmaster pagina.`;
+
+const subGenre = data.classifications?.[0]?.subGenre?.name;
+const saleStart = data.sales?.public?.startDateTime?.slice(0, 10);
+const saleEnd = data.sales?.public?.endDateTime?.slice(0, 10);
+const attractions = data._embedded?.attractions;
 ---
 
 <MainLayout>
   <body>
+    <button class="terugKnop" onclick="history.back()">← Terug</button>
 
     <div class="coverImage">
       <img src={image} alt={data.name} />
@@ -46,65 +62,152 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
         <p>TICKETMASTER · NEDERLAND</p>
         <h1>{data.name}</h1>
         <p>+ LIVE IN CONCERT +</p>
-        {segment && genre && <small>{segment} · {genre}</small>}
+        {
+          segment && genre && (
+            <small>
+              {segment} · {genre}
+            </small>
+          )
+        }
       </header>
     </div>
 
     <div id="ticketStyle">
-
       <div class="divBorder">
-      <section>
-        <article>
-          <small>LOCATIE</small>
-          {venue && <h2>{venue.name}</h2>}
-          {venue && <p>{venue.address?.line1}, {venue.city?.name}</p>}
-        </article>
-        <p class="dagMaand">
-          <strong>{dag}</strong>
-          <span>{maand}</span>
-        </p>
-      </section>
-
-      <section>
-        {tijd && (
+        <section>
           <article>
-            <small>AANVANG</small>
-            <strong>{tijd}</strong>
+            <small>LOCATIE</small>
+            {venue && <h2>{venue.name}</h2>}
+            {
+              venue && (
+                <p>
+                  {venue.address?.line1}, {venue.city?.name}
+                </p>
+              )
+            }
           </article>
-        )}
-        <article>
-          <small>STATUS</small>
-          <strong>{status}</strong>
-        </article>
-      </section>
+          <p class="dagMaand">
+            <strong>{dag}</strong>
+            <span>{maand}</span>
+          </p>
+        </section>
 
-      <div class="ticketResale">
-        <small>UNAUTHORISED RESALE PROHIBITED</small>
-        <a href={data.url} target="_blank">KOOP TICKETS →</a>
-      </div>
+        <section>
+          {
+            tijd && (
+              <article>
+                <small>AANVANG</small>
+                <strong>{tijd}</strong>
+              </article>
+            )
+          }
+          <article>
+            <small>STATUS</small>
+            <strong>{status}</strong>
+          </article>
+        </section>
+
+        <div class="ticketResale">
+          <small>UNAUTHORISED RESALE PROHIBITED</small>
+          <a href={data.url} target="_blank">KOOP TICKETS →</a>
+        </div>
       </div>
     </div>
 
     <div class="extraInfo">
-    <section class="beschrijvingSection">
-      <h2>Beschrijving</h2>
-      <p>{eventDescription}</p>
-    </section>
+      <section class="beschrijvingSection">
+        <div>
+          <h2>Beschrijving</h2>
+          <p>{eventDescription}</p>
+          <a href={data.url} target="_blank">Bekijk op Ticketmaster →</a>
+        </div>
+      </section>
 
-    <section class="toegankelijkheidSection">
-      <h2>Toegankelijkheid</h2>
-      <p>{accessibilityInfo}</p>
-    </section>
+      <section class="toegankelijkheidSection">
+        <h2>Toegankelijkheid</h2>
+        <p>{accessibilityInfo}</p>
+      </section>
 
-    <section class="plattegrondEvent">
+      <section class="extraGrid">
+      
+        { saleStart && (
+            <article class="extraItem">
+              <small>VERKOOP START</small>
+              <strong>{saleStart}</strong>
+            </article>
+          )
+        }
+        { saleEnd && (
+            <article class="extraItem">
+              <small>VERKOOP SLUIT</small>
+              <strong>{saleEnd}</strong>
+            </article>
+          )
+        }
+        { venue?.postalCode && (
+            <article class="extraItem">
+              <small>POSTCODE</small>
+              <strong>{venue.postalCode}</strong>
+            </article>
+          )
+        }
+        { venue?.country?.name && (
+            <article class="extraItem">
+              <small>LAND</small>
+              <strong>{venue.country.name}</strong>
+            </article>
+          )
+        }
+        { subGenre && subGenre !== "Undefined" && (
+            <article class="extraItem">
+              <small>SUBGENRE</small>
+              <strong>{subGenre}</strong>
+            </article>
+          )
+        }
+        { venue?.timezone && (
+            <article class="extraItem">
+              <small>TIJDZONE</small>
+              <strong>{venue.timezone}</strong>
+            </article>
+          )
+        }
+      </section>
 
-      {seatMap && (
-          <h2>Plattegrond</h2>
-          <img src={seatMap} alt="Plattegrond van de locatie" />
-      )}
-    </section>
+      {
+        attractions && attractions.length > 0 && (
+          <section class="artiestSectie">
+            <h2>Artiesten</h2>
+            <ul class="artiestLijst">
+              {attractions.map((a) => (
+                <li>
+                  {a.images?.[0]?.url && (
+                    <img src={a.images[0].url} alt={a.name} />)}
+                  <div>
+                    <p class="artiestNaam">{a.name}</p>
+                    {a.classifications?.[0]?.genre?.name && (
+                      <small>{a.classifications[0].genre.name}</small>)}
+                  </div>
+                  {a.url && (
+                    <a href={a.url} target="_blank">→</a>)}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <section class="plattegrondEvent">
+        {
+          seatMap && (
+            <>
+              <h2>Plattegrond</h2>
+              <img src={seatMap} alt="Plattegrond van de locatie" />
+            </>
+          )
+        }
+      </section>
     </div>
-
   </body>
 </MainLayout>
 
@@ -147,10 +250,10 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.40);
+      background: rgba(0, 0, 0, 0.4);
 
       h1 {
-        font-family: 'Bebas Neue', sans-serif;
+        font-family: "Bebas Neue", sans-serif;
         font-size: 72px;
         line-height: 1;
         color: #fff;
@@ -175,7 +278,6 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
       }
     }
   }
-
 
   /* Ticket */
   #ticketStyle {
@@ -218,12 +320,12 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
   }
 
   article strong {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 28px;
   }
 
   section:first-of-type article h2 {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 22px;
     color: black;
     margin: 0;
@@ -241,7 +343,7 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
   }
 
   .dagMaand strong {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 48px;
     color: #111;
     line-height: 1;
@@ -249,7 +351,7 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
   }
 
   .dagMaand span {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 22px;
     color: #111;
   }
@@ -270,7 +372,7 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
   }
 
   .ticketResale a {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 16px;
     color: #111;
     text-decoration: none;
@@ -283,21 +385,142 @@ const accessibilityInfo = data.accessibility?.info || "Geen toegankelijkheidsinf
     overflow: hidden;
   }
 
-  .beschrijvingSection, .toegankelijkheidSection {
-    max-width: 900px;
-        display: flex;
+  .beschrijvingSection,
+  .toegankelijkheidSection {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 1rem;
   }
 
+  .beschrijvingSection a {
+    font-size: 12px;
+    color: #111;
+    border-bottom: 1px solid #111;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .beschrijvingSection p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #444;
+    font-family: "IBM Plex Mono", monospace;
+    margin-top: 0.5rem;
+  }
+
+  .beschrijvingSection h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+  }
+
   .plattegrondEvent {
-    
     img {
       width: 100%;
       height: auto;
       border-radius: 12px;
     }
   }
+
+  .extraGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px dashed #ccc;
+}
+
+.extraItem {
+  padding: 1rem 1.25rem;
+  border-right: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+}
+
+.extraItem:nth-child(3n) {
+  border-right: none;
+}
+
+.extraItem small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #888;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.extraItem strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: #111;
+}
+
+.artiestSectie {
+  background: #f5f0e8;
+  padding: 1.25rem;
+  border-top: 1px dashed #ccc;
+}
+
+.artiestSectie h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  margin-bottom: 0.75rem;
+}
+
+.artiestLijst {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.artiestLijst li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+.artiestLijst li:last-child {
+  border-bottom: none;
+}
+
+.artiestLijst li img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.artiestNaam {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: #111;
+}
+
+.artiestLijst small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.artiestLijst a {
+  margin-left: auto;
+  font-size: 18px;
+  color: #111;
+  text-decoration: none;
+}
+
+.toegankelijkheidSection p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #555;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-top: 0.5rem;
+}
+
+.toegankelijkheidSection h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+}
 </style>
