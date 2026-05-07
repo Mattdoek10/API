@@ -29,6 +29,7 @@ const statusLabels = {
   canceled: "GEANNULEERD",
   postponed: "UITGESTELD",
 };
+
 const status =
   statusLabels[data.dates?.status?.code] || data.dates?.status?.code;
 
@@ -55,6 +56,10 @@ const attractions = data._embedded?.attractions;
 <MainLayout>
   <body>
     <button class="terugKnop" onclick="history.back()">← Terug</button>
+
+    <!-- Deze JSX code heb ik eerst laten genereren door AI om het makkelijker te kunnen formuleren, ipv met if else statment te schrijven en daarna heb ik het zelf nageschreven en aangepast.
+    Prompt: "hoe schrijf ik een if statement in astro/jsx zonder if else te gebruiken, laat een voorbeeld zien met segment en genre"
+    Bron: Claude (Anthropic), mei 2026. -->
 
     <div class="coverImage">
       <img src={image} alt={data.name} />
@@ -173,6 +178,8 @@ const attractions = data._embedded?.attractions;
           )
         }
       </section>
+
+      <!-- bron met ai, prompt; hoe kan ik de artiesten die bij een event horen ook laten zien op mijn detailpagina? ik heb al een veld in me api response gevonden dat attractions heet, maar ik weet niet hoe ik die data moet gebruiken en laten zien op me pagina. -->
 
       {
         attractions && attractions.length > 0 && (
